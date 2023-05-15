@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('place', include('place_remember.urls'))
+    path('', include('place_remember.urls')),
+    path('', include('social_django.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
