@@ -3,37 +3,34 @@
 {% block title %} Профиль {% endblock %}
 
 {% block content %}
-<a href="/accounts/logout"><h5 style="color:red;">Выйти</h5></a>
-<img src="{{ data.photo_100 }}">
-<p></p>
-<h3>{{ data.first_name }} {{ data.last_name }}</h3>
-<p></p>
 <h2>Ваши воспоминания</h2>
 {% if memories|length == 0 %}
     <p>У вас ещё нет ни одного воспоминания!</p>
 {% else %}
     {% for memory in memories %}
-        <h4>{{ memory.title }}</h4>
-        <p>{{ memory.comment }}</p>
-        <div id="map" style="width: 25%; height: 300px;"></div>
-    
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=d9edaa71-802b-4c36-a600-ccb38382649f&lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript">
-        ymaps.ready(init);
+        <div>
+            <h4>{{ memory.title }}</h4>
+            <p>{{ memory.comment }}</p>
+            <div id="map" style="width: 25%; height: 300px;"></div>
         
-        function init() {
-            var map = new ymaps.Map('map', {
-                center: [{{ memory.latitude }}, {{ memory.longitude }}],
-                zoom: 14
-            });
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=19867516-62f9-42e8-8e1e-2a7eac79be40&lang=ru_RU" type="text/javascript"></script>
+        <script type="text/javascript">
+            ymaps.ready(init);
             
-            var placemark = new ymaps.Placemark([{{ memory.latitude }}, {{ memory.longitude }}]);
-            map.geoObjects.add(placemark);
-        }
-    </script>
+            function init() {
+                var map = new ymaps.Map('map', {
+                    center: [{{ memory.latitude }}, {{ memory.longitude }}],
+                    zoom: 14
+                });
+                
+                var placemark = new ymaps.Placemark([{{ memory.latitude }}, {{ memory.longitude }}]);
+                map.geoObjects.add(placemark);
+            }
+        </script>
+        </div>
     {% endfor %}
 {% endif %}
 <br>
 <br>
-<button>Добавить воспоминание</button>
+<a href="/add_memory"><button>Добавить воспоминание</button></a>
 {% endblock %}
