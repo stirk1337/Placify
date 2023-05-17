@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-a813&2)$8!p4*k!f&g8h(dp9^g0unkjq)x9%l8_o-6!t&o+_8s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['25.37.105.93']
 
 
 # Application definition
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'place_remember',
     'social_django',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -153,3 +155,9 @@ USE_L10N = False
 if DEBUG:
     import mimetypes
     mimetypes.add_type("application/javascript", ".js", True)
+
+#  django-crispy-forms
+# https://django-crispy-forms.readthedocs.io/en/latest/install.html
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# End django-crispy-forms

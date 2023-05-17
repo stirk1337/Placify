@@ -1,17 +1,19 @@
 {% extends 'place_remember/layout.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+    <div>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        
-        <div id="map" style="width: 100%; height: 400px;"></div>
+        {{ form|crispy }}
+        <div class="mx-auto map-block" style="width: 35%; height: 300px; margin-bottom: 40px;">
+        <div id="map" style="width: 100%; height: 600px; margin-bottom: 50px;"></div>
         
         <input type="hidden" id="latitude" name="latitude" value="">
         <input type="hidden" id="longitude" name="longitude" value="">
         
         <button type="submit" class="btn btn-primary">Добавить воспоминание</button>
-    </form>
+    </form> 
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=19867516-62f9-42e8-8e1e-2a7eac79be40" type="text/javascript"></script>
@@ -33,5 +35,6 @@
             padding: 5px;
         }
     </style>
-    <div id="map"></div>
+    </div>
+
 {% endblock %}

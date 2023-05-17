@@ -3,34 +3,50 @@
 {% block title %} Профиль {% endblock %}
 
 {% block content %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey=19867516-62f9-42e8-8e1e-2a7eac79be40&lang=ru_RU" type="text/javascript"></script>
+<a href="/add_memory" style="margin-top: 50px;"><button type="submit" class="btn btn-primary">Добавить воспоминание</button></a>
 <h2>Ваши воспоминания</h2>
+<br>
 {% if memories|length == 0 %}
-    <p>У вас ещё нет ни одного воспоминания!</p>
+<p class="w-25 p-3 mx-auto lead">У вас ещё нет ни одного воспоминания!</p>
 {% else %}
     {% for memory in memories %}
-        <div>
-            <h4>{{ memory.title }}</h4>
-            <p>{{ memory.comment }}</p>
-            <div id="map" style="width: 25%; height: 300px;"></div>
-        
-        <script src="https://api-maps.yandex.ru/2.1/?apikey=19867516-62f9-42e8-8e1e-2a7eac79be40&lang=ru_RU" type="text/javascript"></script>
-        <script type="text/javascript">
-            ymaps.ready(init);
-            
-            function init() {
-                var map = new ymaps.Map('map', {
-                    center: [{{ memory.latitude }}, {{ memory.longitude }}],
-                    zoom: 14
-                });
+    <h5>{{ memory.title }}</h5>
+    <p class="w-25 p-3 mx-auto lead">{{ memory.comment }}</p>
+            <div class="mx-auto map-block" style="width: 35%; height: 300px; margin-bottom: 40px;">
                 
-                var placemark = new ymaps.Placemark([{{ memory.latitude }}, {{ memory.longitude }}]);
-                map.geoObjects.add(placemark);
-            }
-        </script>
-        </div>
+            <script type="text/javascript">
+                ymaps.ready(init);
+
+                function init() {
+                    var myMap = new ymaps.Map('map{{ forloop.counter }}', {
+                        center: [{{ memory.latitude }}, {{ memory.longitude }}],
+                        zoom: 14
+                    }, {
+                        searchControlProvider: 'yandex#search'
+                    }),
+                    myPlacemark = new ymaps.Placemark([{{ memory.latitude }}, {{ memory.longitude }}]);
+
+                myMap.geoObjects.add(myPlacemark);
+
+                myPlacemark.events
+                    .add('mouseenter', function (e) {
+                        // Ссылку на объект, вызвавший событие,
+                        // можно получить из поля 'target'.
+                        e.get('target').options.set('preset', 'islands#greenIcon');
+                    })
+                    .add('mouseleave', function (e) {
+                        e.get('target').options.unset('preset');
+                    });
+                }   
+            </script>
+            <style>
+                html, body, #map{{ forloop.counter }} {
+                    width: 100%; height: 100%; padding: 0; margin: 0;
+                }
+            </style>
+            <div id="map{{ forloop.counter }}"> </div>
+            </div>
     {% endfor %}
 {% endif %}
-<br>
-<br>
-<a href="/add_memory"><button>Добавить воспоминание</button></a>
 {% endblock %}
