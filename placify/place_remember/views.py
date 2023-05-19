@@ -12,7 +12,17 @@ def get_vk_profile(request) -> dict:
     vk_user = UserSocialAuth.objects.get(user=request.user)
     id = vk_user.uid
     access_token = vk_user.extra_data['access_token']
-    req = requests.get(f'https://api.vk.com/method/users.get?user_ids={id}&fields=photo_100&access_token={access_token}&v=5.131')
+    url = (
+        "https://api.vk.com/method/users.get?"
+        f"user_ids={id}"
+        "&fields=photo_100"
+        f"&access_token={access_token}"
+        "&v=5.131"
+        )
+    req = requests.get(
+        url
+        )
+
     res = req.json()
     vk_data = res['response'][0]
     return vk_data
