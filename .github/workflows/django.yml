@@ -31,4 +31,6 @@ jobs:
         flake8 --exclude=migrations
     - name: Run Tests
       run: |
-        python placify/manage.py test
+        coverage run placify/manage.py test
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
