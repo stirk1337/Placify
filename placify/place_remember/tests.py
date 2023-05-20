@@ -1,9 +1,10 @@
-from django.test import TestCase, RequestFactory
-from django.urls import reverse
 from django.contrib.auth.models import User
+from django.test import RequestFactory, TestCase
+from django.urls import reverse
 from social_django.models import UserSocialAuth
-from .models import Memory
+
 from .forms import MemoryForm
+from .models import Memory
 from .views import get_vk_profile
 
 
@@ -22,19 +23,19 @@ class MemoryTestCase(TestCase):
                           'comment': 'New Comment',
                           'latitude': '12.345',
                           'longitude': '67.890'}
-        access_token = ("vk1.a.xz5Xtf-e6rt0PUGoPAHnnKrAF"
-                        "S6bZrpXTAM6Ivv5qWNYpLHR5JlA9RzKQ"
-                        "OttzIJyvg3gs5kANfbX1UZyXQaaByZTA"
-                        "qYwBExPofYxnjVzF__qw5UJdO9a6OU35"
-                        "LTJAqtugtRexE0pczOxWBfUP8izmilCR"
-                        "C1XOPO-NnRZq39PQQNFm1VfPpvgDZlEQ"
-                        "cKL_FHuwEpFdXzclfbJzTTgHwJguw"
+        access_token = ('vk1.a.xz5Xtf-e6rt0PUGoPAHnnKrAF'
+                        'S6bZrpXTAM6Ivv5qWNYpLHR5JlA9RzKQ'
+                        'OttzIJyvg3gs5kANfbX1UZyXQaaByZTA'
+                        'qYwBExPofYxnjVzF__qw5UJdO9a6OU35'
+                        'LTJAqtugtRexE0pczOxWBfUP8izmilCR'
+                        'C1XOPO-NnRZq39PQQNFm1VfPpvgDZlEQ'
+                        'cKL_FHuwEpFdXzclfbJzTTgHwJguw'
                         )
         UserSocialAuth.objects.create(user=self.user,
                                       provider='vk-oauth2', uid='271682919',
                                       extra_data={
                                           'access_token': access_token
-                                          })
+                                      })
         request_factory = RequestFactory()
         request = request_factory.get('/')
         request.user = self.user

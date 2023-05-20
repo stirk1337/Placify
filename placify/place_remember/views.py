@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
 import requests
-from social_django.models import UserSocialAuth
-from .models import Memory
-from .forms import MemoryForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+from social_django.models import UserSocialAuth
+
+from .forms import MemoryForm
+from .models import Memory
 
 
 def get_vk_profile(request) -> dict:
@@ -13,15 +14,15 @@ def get_vk_profile(request) -> dict:
     id = vk_user.uid
     access_token = vk_user.extra_data['access_token']
     url = (
-        "https://api.vk.com/method/users.get?"
-        f"user_ids={id}"
-        "&fields=photo_100"
-        f"&access_token={access_token}"
-        "&v=5.131"
-        )
+        'https://api.vk.com/method/users.get?'
+        f'user_ids={id}'
+        '&fields=photo_100'
+        f'&access_token={access_token}'
+        '&v=5.131'
+    )
     req = requests.get(
         url
-        )
+    )
 
     res = req.json()
     vk_data = res['response'][0]
@@ -33,7 +34,7 @@ def index(request):
                   {'data': get_vk_profile(request)})
 
 
-@login_required(login_url="/")
+@login_required(login_url='/')
 def profile(request):
     vk_data = get_vk_profile(request)
     memories = Memory.objects.filter(user=request.user)
