@@ -1,4 +1,5 @@
 {% extends 'place_remember/layout.html' %}
+{% load static %}
 
 {% block title %} Placify {% endblock %}
 
@@ -11,7 +12,7 @@
             С помощью Placify вы можете создавать персональные коллекции, где каждый отдельный элемент - это уникальное место, которое вы посетили.
         </p>
         <p class="lead">
-            <a href="/login/vk-oauth2"><img src="static/place_remember/img/vk.png" width="300"  height="60"></a>
+            <a href="/login/vk-oauth2"><img src="{% static 'place_remember/img/vk.png' %}" width="300"  height="60"></a>
         </p>
       </main>
 {% endblock %}
