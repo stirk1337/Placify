@@ -1,6 +1,6 @@
 services:
   python:
-    build: .
+    image: stirk1337/placify:latest
     command: sh -c "python /app/placify/manage.py migrate &&
              python /app/placify/manage.py runserver 0.0.0.0:8000"
     ports:
