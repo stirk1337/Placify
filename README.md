@@ -1,6 +1,6 @@
 # Placify
-[![Coverage Status](https://coveralls.io/repos/github/stirk1337/Placify/badge.svg?branch=main)](https://coveralls.io/github/stirk1337/Placify?branch=main)
 ![logo](https://github.com/stirk1337/Placify/assets/63664630/9abc4293-f068-44b7-a685-29e3472c707d)
+[![Coverage Status](https://coveralls.io/repos/github/stirk1337/Placify/badge.svg?branch=main)](https://coveralls.io/github/stirk1337/Placify?branch=main)
 
 ## Цель
 Создать веб-приложение, с помощью которого люди смогут хранить свои впечатления о посещаемых местах.
